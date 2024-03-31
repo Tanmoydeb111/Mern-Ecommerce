@@ -34,7 +34,7 @@ const Navbar = () => {
                   {item.label}
                   {item.label === 'Cart' && cart.cartItems.length > 0 && (
                     <span className="absolute top-0 right-0 inline-block bg-red-500 text-white text-xs px-2 rounded-full">
-                      {cart.cartItems.length}
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </span>
                   )}
                 </Link>
