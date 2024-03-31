@@ -6,6 +6,7 @@ import ProductScreen from './screens/ProductScreen';
 import FooterCus from './components/footerCus';
 import Navbar from './components/Navbar';
 import './App.css';
+import CartScreen from './screens/CartScreen';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         </header>
         <main>
           <Routes>
+            <Route path="/cart" element={<CartScreen />} />
             <Route path="/product/:slug" element={<ProductScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
