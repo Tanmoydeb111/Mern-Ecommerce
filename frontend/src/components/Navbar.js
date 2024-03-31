@@ -21,7 +21,7 @@ const Navbar = () => {
               <li key={item.label}>
                 <a
                   href={item.href}
-                  className="font-montserrat leading-normal text-lg text-slate-gray"
+                  className="font-montserrat leading-normal text-lg text-slate-gray  button-33"
                 >
                   {item.label}
                 </a>
@@ -45,7 +45,7 @@ const Navbar = () => {
       </header>
       {isMenuOpen && (
         <div>
-          <nav className="fixed top-0 right-0 left-0 bottom-0 lg:bottom-auto bg-slate-100  ">
+          <nav className="fixed top-0 right-0 left-0 bottom-0 lg:bottom-auto bg-slate-600  ">
             <div
               className="hidden max-lg:block fixed right-0  px-8 py-4 cursor-pointer"
               onClick={() => {
@@ -59,7 +59,7 @@ const Navbar = () => {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="font-montserrat leading-normal text-lg text-slate-gray"
+                    className="font-montserrat leading-normal text-lg text-slate-gray button-33"
                   >
                     {item.label}
                   </a>
