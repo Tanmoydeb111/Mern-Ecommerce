@@ -11,15 +11,10 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about-us', label: 'About Us' },
     { href: '/products', label: 'Products' },
+    { href: '/about-us', label: 'About Us' },
     { href: '/contact-us', label: 'Contact Us' },
-    {
-      href: '/cart',
-      label: `Cart ${
-        cart.cartItems.length > 0 ? `(${cart.cartItems.length})` : ''
-      }`,
-    },
+    { href: '/cart', label: 'Cart' },
   ];
 
   return (
@@ -34,9 +29,14 @@ const Navbar = () => {
               <li key={item.label}>
                 <Link
                   to={item.href}
-                  className="font-montserrat leading-normal text-lg text-slate-gray  button-33"
+                  className="font-montserrat leading-normal text-lg text-slate-gray  button-33 relative"
                 >
                   {item.label}
+                  {item.label === 'Cart' && cart.cartItems.length > 0 && (
+                    <span className="absolute top-0 right-0 inline-block bg-red-500 text-white text-xs px-2 rounded-full">
+                      {cart.cartItems.length}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
@@ -72,9 +72,14 @@ const Navbar = () => {
                 <li key={item.label}>
                   <Link
                     to={item.href}
-                    className="font-montserrat leading-normal text-lg text-slate-gray button-33"
+                    className="font-montserrat leading-normal text-lg text-slate-gray button-33 relative"
                   >
                     {item.label}
+                    {item.label === 'Cart' && cart.cartItems.length > 0 && (
+                      <span className="absolute top-0 right-0 inline-block bg-red-500 text-white text-xs px-2 rounded-full">
+                        {cart.cartItems.length}
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}
