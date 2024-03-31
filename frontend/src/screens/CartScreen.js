@@ -1,13 +1,34 @@
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function CartScreen() {
+  const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
+
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+  };
+  const removeItemHandler = (item) => {
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+  };
+
+  const checkoutHandler = () => {
+    navigate('/signin?redirect=/shipping');
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -49,14 +70,16 @@ export default function CartScreen() {
                   </div>
                   <div className="w-1/4 flex items-center space-x-2">
                     <button
-                      className="bg-gray-200 p-2 rounded-md"
+                      onClick={() => updateCartHandler(item, item.quantity - 1)}
                       disabled={item.quantity === 1}
+                      className="bg-gray-200 p-2 rounded-md"
                     >
                       <i className="fas fa-minus-circle"></i>
                     </button>
                     <span>{item.quantity}</span>
                     <button
                       className="bg-gray-200 p-2 rounded-md"
+                      onClick={() => updateCartHandler(item, item.quantity + 1)}
                       disabled={item.quantity === item.countInStock}
                     >
                       <i className="fas fa-plus-circle"></i>
@@ -64,7 +87,10 @@ export default function CartScreen() {
                   </div>
                   <div className="w-1/4">${item.price}</div>
                   <div className="w-1/4">
-                    <button className="bg-red-500 text-white p-2 rounded-md">
+                    <button
+                      onClick={() => removeItemHandler(item)}
+                      className="bg-red-500 text-white p-2 rounded-md"
+                    >
                       <i className="fas fa-trash"></i>
                     </button>
                   </div>
