@@ -48,6 +48,18 @@ const data = {
       numReviews: 10,
       description: 'high quality product',
     },
+    {
+      name: 'Nike Slim Pant',
+      slug: 'nike-slim-pant2',
+      category: 'Pants',
+      image: '/images/image.png',
+      price: 25,
+      countInStock: 0,
+      brand: 'Nike',
+      rating: 2.5,
+      numReviews: 14,
+      description: 'high quality product',
+    },
   ],
 };
 export default data;

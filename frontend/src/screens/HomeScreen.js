@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useReducer, useState } from 'react';
 import Product from './Product';
+import { Helmet } from 'react-helmet-async';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -37,14 +38,23 @@ function HomeScreen() {
 
   return (
     <div>
-      <h1>Featured Products</h1>
-      <div className="flex flex-wrap items-start">
+      <Helmet>
+        <title>Studio Nupur</title>
+      </Helmet>
+      <h1 className="font-bold">Featured Products</h1>
+      <div>
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
           <div>{error}</div>
         ) : (
-          products.map((product) => <Product product={product}></Product>)
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {products.map((product) => (
+              <div key={product.slug}>
+                <Product product={product}></Product>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
