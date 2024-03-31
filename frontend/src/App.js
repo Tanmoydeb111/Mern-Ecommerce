@@ -7,6 +7,7 @@ import FooterCus from './components/footerCus';
 import Navbar from './components/Navbar';
 import './App.css';
 import CartScreen from './screens/CartScreen';
+import SigninScreen from './screens/SigninScreen';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/product/:slug" element={<ProductScreen />} />
             <Route path="/" element={<HomeScreen />} />
+            <Route path="/signin" element={<SigninScreen />} />
           </Routes>
         </main>
 
