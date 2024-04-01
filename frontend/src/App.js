@@ -1,6 +1,8 @@
 import data from './data';
 import logo from './logo.svg';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import FooterCus from './components/footerCus';
@@ -18,6 +20,7 @@ function App() {
           <Link to="/">StudioNupur</Link>
         </header>
         <main>
+          <ToastContainer position="bottom-center" limit={1} />
           <Routes>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/product/:slug" element={<ProductScreen />} />

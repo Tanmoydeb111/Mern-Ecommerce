@@ -6,8 +6,14 @@ import { Store } from '../Store';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+  };
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -40,12 +46,78 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            {userInfo ? (
+              <li className="relative inline-block text-left">
+                <div>
+                  <button
+                    type="button"
+                    className="font-montserrat leading-normal text-lg text-slate-gray focus:outline-none"
+                    id="options-menu"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    {userInfo.name}
+                    <svg
+                      className="-mr-1 ml-2 h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                {isDropdownOpen && (
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="options-menu"
+                  >
+                    <div className="py-1" role="none">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        role="menuitem"
+                      >
+                        User Profile
+                      </Link>
+                      <Link
+                        to="/orderhistory"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        role="menuitem"
+                      >
+                        Order History
+                      </Link>
+                      <Link
+                        to="#signout"
+                        onClick={signoutHandler}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        role="menuitem"
+                      >
+                        Sign Out
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </li>
+            ) : (
+              <li>
+                <Link
+                  className="font-montserrat leading-normal text-lg text-slate-gray"
+                  to="/signin"
+                >
+                  Sign In
+                </Link>
+              </li>
+            )}
           </ul>
-          <div className="flex gap-2 text-lg leading-normal font-medium font-montserrat max-lg:hidden wide:mr-24">
-            <Link to="/signin">Sign in</Link>
-            <span>/</span>
-            <Link to="/">Explore now</Link>
-          </div>
           <div
             className="hidden max-lg:block cursor-pointer"
             onClick={() => {
@@ -72,7 +144,7 @@ const Navbar = () => {
                 <li key={item.label}>
                   <Link
                     to={item.href}
-                    className="font-montserrat leading-normal text-lg text-slate-gray button-33 relative"
+                    className="font-montserrat leading-normal text-lg text-slate-gray button-33"
                   >
                     {item.label}
                     {item.label === 'Cart' && cart.cartItems.length > 0 && (
@@ -83,6 +155,77 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+              {userInfo ? (
+                <li className="relative inline-block text-left">
+                  <div>
+                    <button
+                      type="button"
+                      className="font-montserrat leading-normal text-lg text-slate-gray focus:outline-none"
+                      id="options-menu"
+                      aria-haspopup="true"
+                      aria-expanded="true"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      {userInfo.name}
+                      <svg
+                        className="-mr-1 ml-2 h-5 w-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  {isDropdownOpen && (
+                    <div
+                      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <div className="py-1" role="none">
+                        <Link
+                          to="/profile"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                          role="menuitem"
+                        >
+                          User Profile
+                        </Link>
+                        <Link
+                          to="/orderhistory"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                          role="menuitem"
+                        >
+                          Order History
+                        </Link>
+                        <Link
+                          to="#signout"
+                          onClick={signoutHandler}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                          role="menuitem"
+                        >
+                          Sign Out
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    className="font-montserrat leading-normal text-lg text-slate-gray"
+                    to="#signin"
+                  >
+                    Sign In
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>

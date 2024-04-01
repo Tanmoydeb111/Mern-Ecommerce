@@ -111,6 +111,7 @@ export default function CartScreen() {
               </div>
               <div>
                 <button
+                  onClick={checkoutHandler}
                   className="w-full bg-blue-500 text-white p-2 rounded-md"
                   disabled={cartItems.length === 0}
                 >
