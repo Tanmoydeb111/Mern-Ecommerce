@@ -29,7 +29,7 @@ function Product(props) {
   return (
     <div className="flex flex-col m-2 px-5" key={product.slug}>
       <div
-        className="flex flex-col cursor-pointer bg-white justify-center py-6 px-10 text-center items-center mt-12 rounded-tl-[35px] rounded-br-[35px] shadow-2xl md:min-h-[340px] w-full card-item-div max-w-screen-md min-h-[260px]"
+        className="flex flex-col cursor-pointer bg-white justify-center py-6 px-10 text-center items-center mt-12 rounded-[35px]  shadow-2xl md:min-h-[340px] w-full card-item-div max-w-screen-md min-h-[260px]"
         style={{ backgroundImage: `url(${product.image})` }}
       >
         {/* <div> */}
