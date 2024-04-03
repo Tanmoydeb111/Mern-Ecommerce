@@ -71,7 +71,7 @@ function ProductScreen() {
   ) : (
     <div>
       <h1>{slug}</h1>
-      <div className="flex text-white">
+      <div className="flex text-black">
         <div className="w-1/2">
           <img className="w-full" src={product.image} alt={product.name}></img>
         </div>

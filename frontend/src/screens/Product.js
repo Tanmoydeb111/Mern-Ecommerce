@@ -46,7 +46,7 @@ function Product(props) {
           <p className="text-[24px] font-bold uppercase mb-7">{product.name}</p>
         </Link>
         <p>
-          <strong>${product.price}</strong>
+          <strong>₹{product.price}</strong>
         </p>
         <p>
           <Rating rating={product.rating} numReviews={product.numReviews} />
