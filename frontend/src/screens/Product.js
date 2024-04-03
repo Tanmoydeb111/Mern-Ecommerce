@@ -27,44 +27,50 @@ function Product(props) {
   };
 
   return (
-    <div className="flex flex-col m-2 px-5" key={product.slug}>
-      <div
-        className="flex flex-col cursor-pointer bg-white justify-center py-6 px-10 text-center items-center mt-12 rounded-[35px]  shadow-2xl md:min-h-[340px] w-full card-item-div max-w-screen-md min-h-[260px]"
-        style={{ backgroundImage: `url(${product.image})` }}
-      >
-        {/* <div> */}
+    <div
+      className="relative flex w-83 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-2"
+      key={product.slug}
+    >
+      <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
         <Link to={`/product/${product.slug}`}>
           <img
             src={product.image}
             alt={product.name}
-            className="w-[75px] mb-4"
+            className="h-full w-full object-cover"
           />
         </Link>
-
-        {/* <div> */}
+      </div>
+      <div className="p-6">
         <Link to={`/product/${product.slug}`}>
-          <p className="text-[24px] font-bold uppercase mb-7">{product.name}</p>
+          <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
+            {product.name}
+          </p>
         </Link>
-        <p>
+        <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
           <strong>₹{product.price}</strong>
         </p>
         <p>
           <Rating rating={product.rating} numReviews={product.numReviews} />
         </p>
         {product.countInStock === 0 ? (
-          <button disabled>Out of stock</button>
+          <button
+            disabled
+            className="block w-full select-none rounded-lg bg-gray-300 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none hover:bg-blue-gray-900 hover:text-black"
+          >
+            Out of stock
+          </button>
         ) : (
           <button
-            className="flex items-center justify-center button-64"
+            className="block w-full select-none rounded-lg bg-gray-300 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none hover:bg-blue-gray-900 hover:text-black"
+            type="button"
             onClick={() => addToCartHandler(product)}
           >
-            <span>Add to cart</span>
+            Add to Cart
           </button>
         )}
-        {/* </div> */}
-        {/* </div> */}
       </div>
     </div>
   );
 }
+
 export default Product;
