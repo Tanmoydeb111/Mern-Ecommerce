@@ -20,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="bg-slate-800 ">
+      <div className="bg-white ">
         <header>
           <Link to="/">StudioNupur</Link>
         </header>
