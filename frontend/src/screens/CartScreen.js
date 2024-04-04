@@ -3,6 +3,7 @@ import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -25,9 +26,40 @@ export default function CartScreen() {
   const removeItemHandler = (item) => {
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
+  const changeItemSizeHandler = (item, newSize) => {
+    ctxDispatch({
+      type: 'CART_CHANGE_SIZE',
+      payload: { ...item, size: newSize },
+    });
+  };
+
+  // const checkoutHandler = () => {
+  //   const isSizeSelected = cartItems.every((item) => item.size !== '');
+
+  //   if (!isSizeSelected) {
+  //     toast.error(
+  //       'Please select a size for all items before proceeding to checkout.'
+  //     );
+  //   } else {
+  //     // Proceed to checkout
+  //     navigate('/signin?redirect=/shipping');
+  //   }
+  // };
 
   const checkoutHandler = () => {
-    navigate('/signin?redirect=/shipping');
+    const isSizeSelected = cartItems.every((item) => item.size !== '');
+
+    console.log(cartItems); // Check the contents of cartItems
+
+    if (!isSizeSelected) {
+      console.log('Size not selected for all items'); // Check if this block is executed
+      toast.error(
+        'Please select a size for all items before proceeding to checkout.'
+      );
+    } else {
+      console.log('Size selected for all items, proceeding to checkout'); // Check if this block is executed
+      navigate('/signin?redirect=/shipping');
+    }
   };
 
   return (
@@ -77,6 +109,7 @@ export default function CartScreen() {
                       <i className="fas fa-minus-circle"></i>
                     </button>
                     <span>{item.quantity}</span>
+
                     <button
                       className="bg-gray-200 p-2 rounded-md"
                       onClick={() => updateCartHandler(item, item.quantity + 1)}
@@ -85,7 +118,7 @@ export default function CartScreen() {
                       <i className="fas fa-plus-circle"></i>
                     </button>
                   </div>
-                  <div className="w-1/4">${item.price}</div>
+                  <div className="w-1/4">₹{item.price}</div>
                   <div className="w-1/4">
                     <button
                       onClick={() => removeItemHandler(item)}
@@ -93,6 +126,20 @@ export default function CartScreen() {
                     >
                       <i className="fas fa-trash"></i>
                     </button>
+                  </div>
+                  <div>
+                    <p>Size: {item.size}</p>
+                    <select
+                      value={item.size}
+                      onChange={(e) =>
+                        changeItemSizeHandler(item, e.target.value)
+                      }
+                    >
+                      <option value="">Select...</option>
+                      <option value="S">Small</option>
+                      <option value="M">Medium</option>
+                      <option value="L">Large</option>
+                    </select>
                   </div>
                 </div>
               ))}
@@ -105,7 +152,7 @@ export default function CartScreen() {
               <div>
                 <h3 className="text-xl font-bold">
                   Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                  items) : $
+                  items) : ₹
                   {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
                 </h3>
               </div>

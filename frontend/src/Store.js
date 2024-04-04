@@ -40,6 +40,17 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case 'CART_CHANGE_SIZE': {
+      const cartItems = state.cart.cartItems.map((item) => {
+        if (item._id === action.payload._id) {
+          return { ...item, size: action.payload.size };
+        }
+        return item;
+      });
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+
     case 'CART_CLEAR':
       return { ...state, cart: { ...state.cart, cartItems: [] } };
     case 'USER_SIGNIN':

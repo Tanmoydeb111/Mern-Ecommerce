@@ -1,6 +1,5 @@
 import axios from 'axios';
-// import { useEffect, useReducer } from 'react';
-import { useContext, useEffect, useReducer } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
@@ -32,6 +31,8 @@ function ProductScreen() {
     loading: true,
     error: '',
   });
+  const [size, setSize] = useState('');
+  // const [color, setColor] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -57,10 +58,17 @@ function ProductScreen() {
     }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity },
+      payload: { ...product, quantity, size },
     });
     navigate('/cart');
   };
+
+  const [selectedSize, setSelectedSize] = useState(
+    product.sizes ? product.sizes[0] : ''
+  );
+  const [selectedColor, setSelectedColor] = useState(
+    product.colors ? product.colors[0] : ''
+  );
 
   return loading ? (
     <div>
@@ -89,7 +97,7 @@ function ProductScreen() {
                 numReviews={product.numReviews}
               ></Rating>
             </li>
-            <li>Price : ${product.price}</li>
+            <li>Price : ₹{product.price}</li>
             <li>
               Description:
               <p>{product.description}</p>
@@ -102,7 +110,7 @@ function ProductScreen() {
               <li>
                 <div className="flex justify-between ">
                   <div>Price:</div>
-                  <div>${product.price}</div>
+                  <div>₹{product.price}</div>
                 </div>
               </li>
               <li>
@@ -121,16 +129,41 @@ function ProductScreen() {
                   </div>
                 </div>
               </li>
-
               {product.countInStock > 0 && (
-                <li>
-                  <button
-                    onClick={addToCartHandler}
-                    className="w-full bg-blue-500 text-white p-2 rounded"
-                  >
-                    Add to Cart
-                  </button>
-                </li>
+                <>
+                  <li>
+                    <label>Size:</label>
+                    <select
+                      value={size}
+                      onChange={(e) => setSize(e.target.value)}
+                    >
+                      <option value="">Select...</option>
+                      <option value="S">Small</option>
+                      <option value="M">Medium</option>
+                      <option value="L">Large</option>
+                    </select>
+                  </li>
+                  {/* <li>
+                    <label>Color:</label>
+                    <select
+                      value={color}
+                      onChange={(e) => setColor(e.target.value)}
+                    >
+                      <option value="">Select...</option>
+                      <option value="red">Red</option>
+                      <option value="blue">Blue</option>
+                      <option value="green">Green</option>
+                    </select>
+                  </li> */}
+                  <li>
+                    <button
+                      onClick={addToCartHandler}
+                      className="w-full bg-blue-500 text-white p-2 rounded"
+                    >
+                      Add to Cart
+                    </button>
+                  </li>
+                </>
               )}
             </ul>
           </div>

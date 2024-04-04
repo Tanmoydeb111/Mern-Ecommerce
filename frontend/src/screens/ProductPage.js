@@ -18,7 +18,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-function HomeScreen() {
+function ProductPage() {
   const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     products: [],
     loading: true,
@@ -38,7 +38,7 @@ function HomeScreen() {
   }, []);
 
   return (
-    <div className="pt-10">
+    <div>
       <Helmet>
         <title>Studio Nupur</title>
       </Helmet>
@@ -63,4 +63,10 @@ function HomeScreen() {
     </div>
   );
 }
-export default HomeScreen;
+// export default HomeScreen;
+
+// function (){
+
+// }
+
+export default ProductPage;

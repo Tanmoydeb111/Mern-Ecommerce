@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Store } from '../Store';
 
 const Navbar = () => {
@@ -20,14 +20,18 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/products', label: 'Products' },
-    { href: '/about-us', label: 'About Us' },
+    { href: '/productpage', label: 'Products' },
+    { href: '/aboutus', label: 'About Us' },
     { href: '/contact-us', label: 'Contact Us' },
     { href: '/cart', label: 'Cart' },
   ];
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
   return (
-    <header className="bg-gray-600">
+    <header className="bg-gray-600 fixed top-0 w-full z-50 ">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
         <NavLink to="/" className="text-3xl font-bold text-white">
           Logo
@@ -154,6 +158,70 @@ const Navbar = () => {
             )}
           </div>
         )}
+        {/* {userInfo && userInfo.isAdmin && (
+          <div className="relative inline-block text-left">
+            <button
+              className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+              id="admin-nav-dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+            >
+              Admin
+              <svg
+                className="-mr-1 ml-2 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div
+                className="py-1"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="admin-nav-dropdown"
+              >
+                <Link
+                  to="/admin/dashboard"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to="/admin/productlist"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  Products
+                </Link>
+                <Link
+                  to="/admin/orderlist"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  Orders
+                </Link>
+                <Link
+                  to="/admin/userlist"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  Users
+                </Link>
+              </div>
+            </div>
+          </div>
+        )} */}
+
         {/* Sign in and user profile for normal screen size */}
         {!isMenuOpen && (
           <div className="hidden lg:flex space-x-4 items-center">
@@ -222,6 +290,72 @@ const Navbar = () => {
               >
                 Sign In
               </NavLink>
+            )}
+          </div>
+        )}
+        {userInfo && userInfo.isAdmin && (
+          <div className="relative inline-block text-left">
+            <button
+              onClick={toggleDropdown}
+              className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+              id="admin-nav-dropdown"
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+            >
+              Admin
+              <svg
+                className="-mr-1 ml-2 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+
+            {isOpen && (
+              <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div
+                  className="py-1"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="admin-nav-dropdown"
+                >
+                  <Link
+                    to="/admin/dashboard"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/admin/productlist"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    Products
+                  </Link>
+                  <Link
+                    to="/admin/orderlist"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    Orders
+                  </Link>
+                  <Link
+                    to="/admin/userlist"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    Users
+                  </Link>
+                </div>
+              </div>
             )}
           </div>
         )}

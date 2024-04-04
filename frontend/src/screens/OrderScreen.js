@@ -130,7 +130,7 @@ export default function OrderScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="">
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
@@ -188,8 +188,10 @@ export default function OrderScreen() {
                     </div>
                     <div className="w-1/4">
                       <span>{item.quantity}</span>
+                      <br></br>
+                      <p>Size: {item.size}</p>
                     </div>
-                    <div className="w-1/4">${item.price}</div>
+                    <div className="w-1/4">₹{item.price}</div>
                   </div>
                 </li>
               ))}
@@ -202,22 +204,22 @@ export default function OrderScreen() {
             <ul className="list-none">
               <li className="py-1 flex justify-between">
                 <span>Items</span>
-                <span>${order.itemsPrice.toFixed(2)}</span>
+                <span>₹{order.itemsPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <span>Shipping</span>
-                <span>${order.shippingPrice.toFixed(2)}</span>
+                <span>₹{order.shippingPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <span>Tax</span>
-                <span>${order.taxPrice.toFixed(2)}</span>
+                <span>₹{order.taxPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <strong>Order Total</strong>
-                <strong>${order.totalPrice.toFixed(2)}</strong>
+                <strong>₹{order.totalPrice.toFixed(2)}</strong>
               </li>
               {!order.isPaid && (
-                <li className="py-1">
+                <li className="py-1 relative z-0">
                   {isPending ? (
                     <LoadingBox />
                   ) : (

@@ -22,16 +22,16 @@ function Product(props) {
     }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...item, quantity },
+      payload: { ...item, quantity, size: '' },
     });
   };
 
   return (
     <div
-      className="relative flex w-83 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-2"
+      className="relative flex w-83 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow hover:shadow-2xl"
       key={product.slug}
     >
-      <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
+      <div className="relative mx-4 mt-4 h-80 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
         <Link to={`/product/${product.slug}`}>
           <img
             src={product.image}

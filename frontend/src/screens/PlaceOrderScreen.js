@@ -34,8 +34,8 @@ export default function PlaceOrderScreen() {
   cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
-  cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.15 * cart.itemsPrice);
+  cart.shippingPrice = cart.itemsPrice > 500 ? round2(0) : round2(10);
+  cart.taxPrice = round2((18 % cart.itemsPrice) + cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
@@ -123,8 +123,10 @@ export default function PlaceOrderScreen() {
                     </div>
                     <div className="w-1/4">
                       <span>{item.quantity}</span>
+                      <br></br>
+                      <span>Size: {item.size}</span>
                     </div>
-                    <div className="w-1/4">${item.price}</div>
+                    <div className="w-1/4">₹{item.price}</div>
                   </div>
                 </li>
               ))}
@@ -140,19 +142,19 @@ export default function PlaceOrderScreen() {
             <ul className="list-none">
               <li className="py-1 flex justify-between">
                 <span>Items</span>
-                <span>${cart.itemsPrice.toFixed(2)}</span>
+                <span>₹{cart.itemsPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <span>Shipping</span>
-                <span>${cart.shippingPrice.toFixed(2)}</span>
+                <span>₹{cart.shippingPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <span>Tax</span>
-                <span>${cart.taxPrice.toFixed(2)}</span>
+                <span>₹{cart.taxPrice.toFixed(2)}</span>
               </li>
               <li className="py-1 flex justify-between">
                 <strong>Order Total</strong>
-                <strong>${cart.totalPrice.toFixed(2)}</strong>
+                <strong>₹{cart.totalPrice.toFixed(2)}</strong>
               </li>
               <li className="py-1">
                 <button
