@@ -22,6 +22,7 @@ import ProductPage from './screens/ProductPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardScreen from './screens/DashboardScreen';
 import AdminRoute from './components/AdminRoute';
+import ProductListScreen from './screens/ProductListScreen';
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
           <Routes>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/product/:slug" element={<ProductScreen />} />
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
             <Route path="/" element={<HomeScreen />} />
             {/* <Route path="/profile" element={<ProfileScreen />} /> */}
             <Route
