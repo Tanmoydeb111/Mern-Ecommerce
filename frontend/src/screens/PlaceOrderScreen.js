@@ -35,7 +35,7 @@ export default function PlaceOrderScreen() {
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 500 ? round2(0) : round2(10);
-  cart.taxPrice = round2((18 % cart.itemsPrice) + cart.itemsPrice);
+  cart.taxPrice = round2((18 / 100) * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
@@ -52,6 +52,7 @@ export default function PlaceOrderScreen() {
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
           totalPrice: cart.totalPrice,
+          size: cart.size,
         },
         {
           headers: {
@@ -77,6 +78,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <div>
+      console.log(cart.size);
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
         <title>Preview Order</title>

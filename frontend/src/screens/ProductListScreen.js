@@ -106,28 +106,59 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table px-6 m-6">
-            <thead>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  NAME
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  PRICE
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  CATEGORY
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  BRAND
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ACTIONS
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white divide-y divide-gray-200">
               {products.map((product) => (
-                <tr key={product._id} className="px-6 m-5">
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
+                <tr key={product._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{product._id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    ₹{product.price}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.category}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.brand}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button
+                      type="button"
+                      className="bg-white text-black py-2 px-4 rounded"
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                    >
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
@@ -135,7 +166,7 @@ export default function ProductListScreen() {
                 key={x + 1}
                 to={`/admin/products?page=${x + 1}`}
               >
-                {x + 1}
+                Next Items: {x}
               </Link>
             ))}
           </div>

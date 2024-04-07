@@ -27,6 +27,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality shirt',
+      size: '',
     },
     {
       // _id: '2',
@@ -40,6 +41,7 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: 'high quality product',
+      size: '',
     },
     {
       // _id: '3',
@@ -53,6 +55,7 @@ const data = {
       rating: 4.5,
       numReviews: 14,
       description: 'high quality product',
+      size: '',
     },
     {
       // _id: '4',
@@ -66,6 +69,7 @@ const data = {
       rating: 4.5,
       numReviews: 10,
       description: 'high quality product',
+      size: '',
     },
     {
       // _id: '5',
@@ -79,6 +83,7 @@ const data = {
       rating: 2.5,
       numReviews: 14,
       description: 'high quality product',
+      size: '',
     },
   ],
 };
