@@ -78,7 +78,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <div>
-      console.log(cart.size);
+      {/* console.log(cart.size); */}
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
         <title>Preview Order</title>
