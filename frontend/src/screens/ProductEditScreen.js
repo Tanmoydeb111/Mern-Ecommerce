@@ -22,6 +22,16 @@ const reducer = (state, action) => {
       return { ...state, loadingUpdate: false };
     case 'UPDATE_FAIL':
       return { ...state, loadingUpdate: false };
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' };
+    case 'UPLOAD_SUCCESS':
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: '',
+      };
+    case 'UPLOAD_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
     default:
       return state;
   }
@@ -33,10 +43,11 @@ export default function ProductEditScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: '',
-  });
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -100,6 +111,28 @@ export default function ProductEditScreen() {
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPDATE_FAIL' });
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+
+      toast.success('Image uploaded successfully');
+      setImage(data.secure_url);
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
 
@@ -182,6 +215,23 @@ export default function ProductEditScreen() {
               onChange={(e) => setImage(e.target.value)}
               required
             />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="imageFile"
+            >
+              Upload File
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="imageFile"
+              type="file"
+              onChange={uploadFileHandler}
+            />
+            {loadingUpload && (
+              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+            )}
           </div>
 
           <div className="mb-4">
