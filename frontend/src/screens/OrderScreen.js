@@ -185,7 +185,7 @@ export default function OrderScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div className="">
+    <div>
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
@@ -198,16 +198,39 @@ export default function OrderScreen() {
               <strong>Name:</strong> {order.shippingAddress.fullName} <br />
               <strong>Address: </strong> {order.shippingAddress.address},
               {order.shippingAddress.city}, {order.shippingAddress.postalCode},
-              {order.shippingAddress.country}
+              {order.shippingAddress.country};
+              {order.shippingAddress.location &&
+                order.shippingAddress.location.lat && (
+                  <a
+                    target="_new"
+                    href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
+                  >
+                    Show On Map
+                  </a>
+                )}
             </p>
+            {/* <p>
+              <strong>Name:</strong> {order?.shippingAddress?.fullName} <br />
+              <strong>Address: </strong> {order?.shippingAddress?.address},
+              {order?.shippingAddress?.city},{' '}
+              {order?.shippingAddress?.postalCode},
+              {order?.shippingAddress?.country}
+              {order?.shippingAddress?.location?.lat && (
+                <a
+                  target="_new"
+                  href={`https://maps.google.com?q=${order?.shippingAddress?.location?.lat},${order?.shippingAddress?.location?.lng}`}
+                >
+                  Show On Map
+                </a>
+              )}
+            </p> */}
+
             {order.isDelivered ? (
-              <div className="p-2 bg-green-500 text-white mt-2 rounded">
+              <MessageBox variant="success">
                 Delivered at {order.deliveredAt}
-              </div>
+              </MessageBox>
             ) : (
-              <div className="p-2 bg-red-500 text-white mt-2 rounded">
-                Not Delivered
-              </div>
+              <MessageBox variant="danger">Not Delivered</MessageBox>
             )}
           </div>
 
@@ -217,13 +240,9 @@ export default function OrderScreen() {
               <strong>Method:</strong> {order.paymentMethod}
             </p>
             {order.isPaid ? (
-              <div className="p-2 bg-green-500 text-white mt-2 rounded">
-                Paid at {order.paidAt}
-              </div>
+              <MessageBox variant="success">Paid at {order.paidAt}</MessageBox>
             ) : (
-              <div className="p-2 bg-red-500 text-white mt-2 rounded">
-                Not Paid
-              </div>
+              <MessageBox variant="danger">Not Paid</MessageBox>
             )}
           </div>
 

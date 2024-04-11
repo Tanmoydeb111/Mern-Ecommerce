@@ -4,24 +4,113 @@ import Order from '../models/orderModel.js';
 // import { isAuth } from '../utils.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import dotenv from 'dotenv';
+import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
+import nodemailer from 'nodemailer';
 
 const orderRouter = express.Router();
+dotenv.config();
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.ST_EMAIL_ID,
+    pass: process.env.ST_PASS,
+  },
+});
 
 orderRouter.get(
   '/',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    console.log('Its in5');
     const orders = await Order.find().populate('user', 'name');
     res.send(orders);
   })
 );
 
+// orderRouter.post(
+//   '/',
+//   isAuth,
+//   expressAsyncHandler(async (req, res) => {
+//     console.log('Its in4');
+//     const newOrder = new Order({
+//       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+//       shippingAddress: req.body.shippingAddress,
+//       paymentMethod: req.body.paymentMethod,
+//       itemsPrice: req.body.itemsPrice,
+//       shippingPrice: req.body.shippingPrice,
+//       taxPrice: req.body.taxPrice,
+//       totalPrice: req.body.totalPrice,
+//       user: req.user._id,
+//     });
+
+//     const order = await newOrder.save();
+//     res.status(201).send({ message: 'New Order Created', order });
+//     console.log(7);
+//     var mailOptions = {
+//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
+//       to: `${order.user.name} <${order.user.email}>`,
+//       subject: `Order ${order._id} has been updated`,
+//       html: payOrderEmailTemplate(updatedOrder),
+//     };
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log('Email sent: ' + info.response);
+//       }
+//     });
+//   })
+// );
+
+// orderRouter.post(
+//   '/',
+//   isAuth,
+//   expressAsyncHandler(async (req, res) => {
+//     console.log('Its in4');
+//     const newOrder = new Order({
+//       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+//       shippingAddress: req.body.shippingAddress,
+//       paymentMethod: req.body.paymentMethod,
+//       itemsPrice: req.body.itemsPrice,
+//       shippingPrice: req.body.shippingPrice,
+//       taxPrice: req.body.taxPrice,
+//       totalPrice: req.body.totalPrice,
+//       user: req.user._id,
+//     });
+
+//     const order = await newOrder.save();
+//     res.status(201).send({ message: 'New Order Created', order });
+//     const order2 = await Order.findById(req.params.id).populate(
+//       'user',
+//       'email name'
+//     );
+//     console.log(7);
+//     console.log(order2.user.email);
+//     var mailOptions = {
+//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
+//       // to: `Tanmoy <tanmoydeb2002@gmail.com>`,
+//       to: `${order2.user.name} <${order2.user.email}>`,
+//       subject: `New Order ${order._id} has been placed`,
+//       html: payOrderEmailTemplate(order),
+//     };
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log('Email sent: ' + info.response);
+//       }
+//     });
+//   })
+// );
+
 orderRouter.post(
   '/',
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log('Its in4');
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       shippingAddress: req.body.shippingAddress,
@@ -35,6 +124,20 @@ orderRouter.post(
 
     const order = await newOrder.save();
     res.status(201).send({ message: 'New Order Created', order });
+    console.log(7);
+    var mailOptions = {
+      from: 'Stdio Nupur <buystudionupur@gmail.com>',
+      to: `${req.user.name} <${req.user.email}>`,
+      subject: `New Order ${order._id} has been placed`,
+      html: payOrderEmailTemplate(order),
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
   })
 );
 
@@ -85,6 +188,7 @@ orderRouter.get(
   '/mine',
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log('Its in3');
     const orders = await Order.find({ user: req.user._id });
     res.send(orders);
   })
@@ -94,7 +198,9 @@ orderRouter.get(
   '/:id',
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log('Its in 2');
     const order = await Order.findById(req.params.id);
+    console.log(order.user.email);
     if (order) {
       res.send(order);
     } else {
@@ -123,7 +229,12 @@ orderRouter.put(
   '/:id/pay',
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log('Its in');
     const order = await Order.findById(req.params.id);
+    // const order = await Order.findById(req.params.id).populate(
+    //   'user',
+    //   'email name'
+    // );
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
@@ -135,9 +246,63 @@ orderRouter.put(
       };
 
       const updatedOrder = await order.save();
+
       res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
+    }
+  })
+);
+
+// orderRouter.put(
+//   '/order/:id',
+//   isAuth,
+//   expressAsyncHandler(async (req, res) => {
+//     var mailOptions = {
+//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
+//       to: `${order.user.name} <${order.user.email}>`,
+//       subject: `Order ${order._id} has been updated`,
+//       html: payOrderEmailTemplate(updatedOrder),
+//     };
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log('Email sent: ' + info.response);
+//       }
+//     });
+//   })
+// );
+
+orderRouter.post(
+  '/',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    console.log('Its in 6');
+    const order = new Order({
+      //... your order creation logic
+    });
+    const createdOrder = await order.save();
+
+    if (createdOrder) {
+      var mailOptions = {
+        from: 'Stdio Nupur <buystudionupur@gmail.com>',
+        to: `${createdOrder.user.name} <${createdOrder.user.email}>`,
+        subject: `New Order ${createdOrder._id} has been placed`,
+        html: payOrderEmailTemplate(createdOrder),
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      res
+        .status(201)
+        .send({ message: 'New Order Created', order: createdOrder });
+    } else {
+      res.status(500).send({ message: 'Error in Creating Order' });
     }
   })
 );

@@ -8,6 +8,7 @@ export default function ShippingAddressScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
+    fullBox,
     userInfo,
     cart: { shippingAddress },
   } = state;
@@ -33,6 +34,7 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        location: shippingAddress.location,
       },
     });
     localStorage.setItem(
@@ -43,10 +45,15 @@ export default function ShippingAddressScreen() {
         city,
         postalCode,
         country,
+        location: shippingAddress.location,
       })
     );
     navigate('/payment');
   };
+  useEffect(() => {
+    ctxDispatch({ type: 'SET_FULLBOX_OFF' });
+  }, [ctxDispatch, fullBox]);
+
   return (
     <div>
       <Helmet>
@@ -112,6 +119,25 @@ export default function ShippingAddressScreen() {
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
+          {/* <div className="mb-3">
+            <button
+              id="chooseOnMap"
+              type="button"
+              className="bg-white text-black py-2 px-4 rounded"
+              onClick={() => navigate('/map')}
+            >
+              Choose Location On Map
+            </button>
+            {shippingAddress.location && shippingAddress.location.lat ? (
+              <div>
+                LAT: {shippingAddress.location.lat}
+                LNG:{shippingAddress.location.lng}
+              </div>
+            ) : (
+              <div>No location</div>
+            )}
+          </div> */}
+
           <div className="mb-3">
             <button
               type="submit"
