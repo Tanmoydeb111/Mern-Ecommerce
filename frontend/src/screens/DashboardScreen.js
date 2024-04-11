@@ -76,7 +76,7 @@ export default function DashboardScreen() {
             </div>
             <div className="p-4 shadow-md">
               <h2 className="font-bold mb-2">
-                $
+                ₹
                 {summary.orders && summary.users[0]
                   ? summary.orders[0].totalSales.toFixed(2)
                   : 0}
