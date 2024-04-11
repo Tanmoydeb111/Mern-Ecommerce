@@ -35,6 +35,7 @@ function ProductScreen() {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [selectedImage, setSelectedImage] = useState('');
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
@@ -128,7 +129,11 @@ function ProductScreen() {
       <h1>{slug}</h1>
       <div className="flex text-black ">
         <div className="w-1/2">
-          <img className="w-full" src={product.image} alt={product.name}></img>
+          <img
+            className="w-full"
+            src={selectedImage || product.image}
+            alt={product.name}
+          ></img>
         </div>
         <div className="w-1/4 px-4 ">
           <ul>
@@ -145,6 +150,28 @@ function ProductScreen() {
               ></Rating>
             </li>
             <li>Price : ₹{product.price}</li>
+            <li className="mb-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {[product.image, ...product.images].map((x) => (
+                  <div key={x} className="col-span-1">
+                    <div className="border rounded shadow">
+                      <button
+                        className="w-full h-full"
+                        type="button"
+                        onClick={() => setSelectedImage(x)}
+                      >
+                        <img
+                          className="w-full h-full object-cover"
+                          src={x}
+                          alt="product"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </li>
+
             <li>
               Description:
               <p>{product.description}</p>
