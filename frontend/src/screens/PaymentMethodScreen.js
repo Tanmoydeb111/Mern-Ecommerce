@@ -62,6 +62,19 @@ export default function PaymentMethodScreen() {
             </label>
           </div>
           <div className="mb-3">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio"
+                name="paymentMethod"
+                value="Cash on Delivery"
+                checked={paymentMethodName === 'Cash on Delivery'}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <span className="ml-2">Cash on Delivery</span>
+            </label>
+          </div>
+          <div className="mb-3">
             <button
               type="submit"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -104,6 +104,25 @@ export default function OrderScreen() {
       }
     });
   }
+
+  async function onApprove2() {
+    try {
+      dispatch({ type: 'PAY_REQUEST' });
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/pay`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: 'PAY_SUCCESS', payload: data });
+      toast.success('Order is paid');
+    } catch (err) {
+      dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+      toast.error(getError(err));
+    }
+  }
+
   function onError(err) {
     toast.error(getError(err));
   }
@@ -292,24 +311,26 @@ export default function OrderScreen() {
                 <strong>Order Total</strong>
                 <strong>₹{order.totalPrice.toFixed(2)}</strong>
               </li>
-              {!order.isPaid && (
-                <li className="py-1 relative z-0">
-                  {isPending ? (
-                    <LoadingBox />
-                  ) : (
-                    <div>
-                      <PayPalButtons
-                        createOrder={createOrder}
-                        onApprove={onApprove}
-                        onError={onError}
-                      ></PayPalButtons>
-                    </div>
-                  )}
-                  {loadingPay && <LoadingBox></LoadingBox>}
-                </li>
-              )}
+              {!userInfo.isAdmin &&
+                !order.isPaid &&
+                order.paymentMethod !== 'Cash on Delivery' && (
+                  <li className="py-1 relative z-0">
+                    {isPending ? (
+                      <LoadingBox />
+                    ) : (
+                      <div>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        ></PayPalButtons>
+                      </div>
+                    )}
+                    {loadingPay && <LoadingBox></LoadingBox>}
+                  </li>
+                )}
               {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && ( */}
-              {userInfo.isAdmin && (
+              {userInfo.isAdmin && !order.isDelivered && order.isPaid && (
                 <li className="mb-4">
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   <div className="flex justify-center">
@@ -319,6 +340,20 @@ export default function OrderScreen() {
                       onClick={deliverOrderHandler}
                     >
                       Deliver Order
+                    </button>
+                  </div>
+                </li>
+              )}
+              {userInfo.isAdmin && !order.isPaid && (
+                <li className="mb-4">
+                  {loadingPay && <LoadingBox></LoadingBox>}
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={onApprove2}
+                    >
+                      Paid
                     </button>
                   </div>
                 </li>

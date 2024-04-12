@@ -5,7 +5,14 @@ import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
 import dotenv from 'dotenv';
-import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
+import {
+  isAuth,
+  isAdmin,
+  mailgun,
+  payOrderEmailTemplate,
+  DeliveryDoneEmailTemplate,
+  payDoneEmailTemplate,
+} from '../utils.js';
 import nodemailer from 'nodemailer';
 
 const orderRouter = express.Router();
@@ -213,11 +220,32 @@ orderRouter.put(
   '/:id/deliver',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    // const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    );
     if (order) {
       order.isDelivered = true;
       order.deliveredAt = Date.now();
       await order.save();
+      if (order.isDelivered) {
+        console.log('Done');
+        // console.log(order.user.email);
+        var mailOptions = {
+          from: 'Stdio Nupur <buystudionupur@gmail.com>',
+          to: `${order.user.name} <${order.user.email}>`,
+          subject: `New Order ${order._id} has been placed`,
+          html: DeliveryDoneEmailTemplate(order),
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+      }
       res.send({ message: 'Order Delivered' });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
@@ -230,11 +258,11 @@ orderRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     console.log('Its in');
-    const order = await Order.findById(req.params.id);
-    // const order = await Order.findById(req.params.id).populate(
-    //   'user',
-    //   'email name'
-    // );
+    // const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    );
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
@@ -246,33 +274,29 @@ orderRouter.put(
       };
 
       const updatedOrder = await order.save();
-
+      if (order.isPaid) {
+        console.log('Done');
+        // console.log(order.user.email);
+        var mailOptions = {
+          from: 'Stdio Nupur <buystudionupur@gmail.com>',
+          to: `${order.user.name} <${order.user.email}>`,
+          subject: `New Order ${order._id} has been placed`,
+          html: payDoneEmailTemplate(order),
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+      }
       res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }
   })
 );
-
-// orderRouter.put(
-//   '/order/:id',
-//   isAuth,
-//   expressAsyncHandler(async (req, res) => {
-//     var mailOptions = {
-//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
-//       to: `${order.user.name} <${order.user.email}>`,
-//       subject: `Order ${order._id} has been updated`,
-//       html: payOrderEmailTemplate(updatedOrder),
-//     };
-//     transporter.sendMail(mailOptions, function (error, info) {
-//       if (error) {
-//         console.log(error);
-//       } else {
-//         console.log('Email sent: ' + info.response);
-//       }
-//     });
-//   })
-// );
 
 orderRouter.post(
   '/',
