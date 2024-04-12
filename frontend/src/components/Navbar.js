@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Store } from '../Store';
 
 const Navbar = () => {
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   // const { fullBox, cart, userInfo } = state;
+  const location = useLocation();
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -33,7 +34,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <header className="bg-gray-600 fixed top-0 w-full z-50 ">
+      <header className="bg-gray-900 fixed top-0 w-full z-50 ">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
           <NavLink to="/" className="text-3xl font-bold text-white">
             Logo
@@ -44,7 +45,7 @@ const Navbar = () => {
                 <NavLink
                   key={item.label}
                   to={item.href}
-                  className="text-white hover:text-gray-300 transition duration-300"
+                  className="text-white hover:text-cyan-600 transition duration-300"
                 >
                   {item.label}
                   {item.label === 'Cart' && cart.cartItems.length > 0 && (
@@ -91,7 +92,7 @@ const Navbar = () => {
                 <div className="block text-white px-4 py-2 hover:bg-gray-700 transition duration-300 relative">
                   <button
                     type="button"
-                    className="font-montserrat leading-normal text-lg text-slate-gray focus:outline-none"
+                    className="font-montserrat leading-normal text-lg text-slate-gray focus:outline-none flex items-center"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"
@@ -141,7 +142,6 @@ const Navbar = () => {
                           onClick={signoutHandler}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                           role="menuitem"
-                          // onClick={setIsDropdownOpen(false)}
                         >
                           Sign Out
                         </NavLink>
@@ -168,7 +168,7 @@ const Navbar = () => {
                 <div className="relative">
                   <button
                     type="button"
-                    className="text-white hover:text-gray-300 transition duration-300"
+                    className="text-white hover:text-gray-300 transition duration-300 flex items-center"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   >
                     {userInfo.name}

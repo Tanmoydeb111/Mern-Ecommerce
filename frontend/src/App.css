@@ -24,10 +24,13 @@
   color: white;
 }
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
+.active {
+  color: aqua;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
