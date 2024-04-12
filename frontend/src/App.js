@@ -28,6 +28,8 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
+import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 function App() {
   return (
@@ -86,6 +88,11 @@ function App() {
             ></Route>
             <Route path="/" element={<HomeScreen />} />
             {/* <Route path="/profile" element={<ProfileScreen />} /> */}
+            <Route path="/forget-password" element={<ForgetPasswordScreen />} />
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPasswordScreen />}
+            />
             <Route
               path="/profile"
               element={
