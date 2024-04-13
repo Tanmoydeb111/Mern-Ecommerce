@@ -35,10 +35,10 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="bg-white pt-16">
-        <header>
+      <div className="bg-amber-300 pt-16">
+        {/* <header>
           <Link to="/">StudioNupur</Link>
-        </header>
+        </header> */}
         <main>
           <ToastContainer position="bottom-center" limit={1} />
           <Routes>

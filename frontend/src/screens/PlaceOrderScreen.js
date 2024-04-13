@@ -83,93 +83,97 @@ export default function PlaceOrderScreen() {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h1 className="my-3">Preview Order</h1>
-      <div className="flex flex-wrap -mx-3">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Shipping</h2>
-            <p>
-              <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-              <strong>Address: </strong> {cart.shippingAddress.address},
-              {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
-              {cart.shippingAddress.country}
-            </p>
-            <Link to="/shipping" className="text-blue-500">
-              Edit
-            </Link>
-          </div>
+      <div className="text-center text-indigo-500">
+        <h1 className="my-3 text-2xl font-bold ">Preview Order</h1>
+      </div>
+      <div className="text-white">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Shipping</h2>
+              <p>
+                <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
+                <strong>Address: </strong> {cart.shippingAddress.address},
+                {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
+                {cart.shippingAddress.country}
+              </p>
+              <Link to="/shipping" className="text-blue-500">
+                Edit
+              </Link>
+            </div>
 
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Payment</h2>
-            <p>
-              <strong>Method:</strong> {cart.paymentMethod}
-            </p>
-            <Link to="/payment" className="text-blue-500">
-              Edit
-            </Link>
-          </div>
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Payment</h2>
+              <p>
+                <strong>Method:</strong> {cart.paymentMethod}
+              </p>
+              <Link to="/payment" className="text-blue-500">
+                Edit
+              </Link>
+            </div>
 
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Items</h2>
-            <ul className="list-none">
-              {cart.cartItems.map((item) => (
-                <li key={item._id} className="py-1">
-                  <div className="flex items-center">
-                    <div className="w-1/2">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full rounded"
-                      />
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Items</h2>
+              <ul className="list-none">
+                {cart.cartItems.map((item) => (
+                  <li key={item._id} className="py-1">
+                    <div className="flex items-center">
+                      <div className="w-1/2">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full rounded"
+                        />
+                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                      </div>
+                      <div className="w-1/4">
+                        <span>{item.quantity}</span>
+                        <br></br>
+                        <span>Size: {item.size}</span>
+                      </div>
+                      <div className="w-1/4">₹{item.price}</div>
                     </div>
-                    <div className="w-1/4">
-                      <span>{item.quantity}</span>
-                      <br></br>
-                      <span>Size: {item.size}</span>
-                    </div>
-                    <div className="w-1/4">₹{item.price}</div>
-                  </div>
+                  </li>
+                ))}
+              </ul>
+              <Link to="/cart" className="text-blue-500">
+                Edit
+              </Link>
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <div className="p-4 shadow">
+              <h2 className="font-bold mb-2">Order Summary</h2>
+              <ul className="list-none">
+                <li className="py-1 flex justify-between">
+                  <span>Items</span>
+                  <span>₹{cart.itemsPrice.toFixed(2)}</span>
                 </li>
-              ))}
-            </ul>
-            <Link to="/cart" className="text-blue-500">
-              Edit
-            </Link>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 px-3">
-          <div className="p-4 shadow">
-            <h2 className="font-bold mb-2">Order Summary</h2>
-            <ul className="list-none">
-              <li className="py-1 flex justify-between">
-                <span>Items</span>
-                <span>₹{cart.itemsPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <span>Shipping</span>
-                <span>₹{cart.shippingPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <span>Tax</span>
-                <span>₹{cart.taxPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <strong>Order Total</strong>
-                <strong>₹{cart.totalPrice.toFixed(2)}</strong>
-              </li>
-              <li className="py-1">
-                <button
-                  type="button"
-                  onClick={placeOrderHandler}
-                  disabled={cart.cartItems.length === 0}
-                  className="w-full py-2 px-4 bg-blue-500 text-white rounded"
-                >
-                  Place Order
-                </button>
-                {loading && <LoadingBox></LoadingBox>}
-              </li>
-            </ul>
+                <li className="py-1 flex justify-between">
+                  <span>Shipping</span>
+                  <span>₹{cart.shippingPrice.toFixed(2)}</span>
+                </li>
+                <li className="py-1 flex justify-between">
+                  <span>Tax</span>
+                  <span>₹{cart.taxPrice.toFixed(2)}</span>
+                </li>
+                <li className="py-1 flex justify-between">
+                  <strong>Order Total</strong>
+                  <strong>₹{cart.totalPrice.toFixed(2)}</strong>
+                </li>
+                <li className="py-1">
+                  <button
+                    type="button"
+                    onClick={placeOrderHandler}
+                    disabled={cart.cartItems.length === 0}
+                    className="w-full py-2 px-4 bg-blue-500 text-white rounded"
+                  >
+                    Place Order
+                  </button>
+                  {loading && <LoadingBox></LoadingBox>}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

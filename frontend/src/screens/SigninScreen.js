@@ -89,8 +89,14 @@ export default function SigninScreen() {
             Create your account
           </Link>
         </div>
-        <div className="mb-3">
-          Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+        <div className="mb-3 ">
+          Forget Password?{' '}
+          <Link
+            to={`/forget-password`}
+            className="text-blue-500 hover:text-blue-800 underline"
+          >
+            Reset Password
+          </Link>
         </div>
       </form>
     </div>

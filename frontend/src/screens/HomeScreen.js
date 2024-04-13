@@ -5,7 +5,7 @@ import Product from './Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Carousel from '../components/Carousel';
+import MyCarousel from '../components/Carousel';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -39,12 +39,12 @@ function HomeScreen() {
   }, []);
 
   return (
-    <div className="pt-10">
+    <div className="pt-10 ">
       <Helmet>
         <title>Studio Nupur</title>
       </Helmet>
-      <div className="App">
-        <Carousel />
+      <div className="mx-8 colSad card-client">
+        <MyCarousel />
       </div>
       <h1 className="font-bold">Featured Products</h1>
       <div>
@@ -55,7 +55,7 @@ function HomeScreen() {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-8">
             {products.map((product) => (
               <div key={product.slug}>
                 <Product product={product}></Product>

@@ -85,7 +85,7 @@ export default function CartScreen() {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="flex items-center space-x-4 bg-white p-4 rounded-md"
+                  className="flex items-center space-x-4 bg-gray-400 p-4 rounded-md"
                 >
                   <div className="w-1/3">
                     <img
@@ -147,7 +147,7 @@ export default function CartScreen() {
           )}
         </div>
         <div className="w-full lg:w-1/3 px-4">
-          <div className="bg-white p-4 rounded-md">
+          <div className="bg-gray-400 p-4 rounded-md">
             <div className="space-y-4">
               <div>
                 <h3 className="text-xl font-bold">

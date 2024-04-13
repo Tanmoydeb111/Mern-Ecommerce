@@ -34,7 +34,7 @@ export default function PaymentMethodScreen() {
           <title>Payment Method</title>
         </Helmet>
         <h1 className="my-3 text-2xl font-bold">Payment Method</h1>
-        <form onSubmit={submitHandler}>
+        {/* <form onSubmit={submitHandler}>
           <div className="mb-3">
             <label className="inline-flex items-center">
               <input
@@ -72,6 +72,62 @@ export default function PaymentMethodScreen() {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <span className="ml-2">Cash on Delivery</span>
+            </label>
+          </div>
+          <div className="mb-3">
+            <button
+              type="submit"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Continue
+            </button>
+          </div>
+        </form> */}
+
+        <h1 className="my-3 text-2xl font-bold text-center text-blue-500">
+          Payment Method
+        </h1>
+        <form
+          onSubmit={submitHandler}
+          className="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <div className="mb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio"
+                name="paymentMethod"
+                value="PayPal"
+                checked={paymentMethodName === 'PayPal'}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <span className="ml-2 text-gray-700">PayPal</span>
+            </label>
+          </div>
+          <div className="mb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio"
+                name="paymentMethod"
+                value="Stripe"
+                checked={paymentMethodName === 'Stripe'}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <span className="ml-2 text-gray-700">Stripe</span>
+            </label>
+          </div>
+          <div className="mb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio"
+                name="paymentMethod"
+                value="Cash on Delivery"
+                checked={paymentMethodName === 'Cash on Delivery'}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+              <span className="ml-2 text-gray-700">Cash on Delivery</span>
             </label>
           </div>
           <div className="mb-3">

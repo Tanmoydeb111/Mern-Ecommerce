@@ -34,18 +34,24 @@ const Navbar = () => {
 
   return (
     <div>
-      <header className="bg-gray-900 fixed top-0 w-full z-50 ">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
-          <NavLink to="/" className="text-3xl font-bold text-white">
-            Logo
-          </NavLink>
+      <header className="bg-transparent fixed top-0 w-full z-50 backdrop-filter-blur">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between ">
+          {/* <NavLink
+            to="/"
+            className="text-3xl font-bold text-[#ff8400] bg-transparent"
+          > */}
+          <Link to="/">
+            <img src="images/logo.svg" className="h-20" alt="Logo" />
+          </Link>
+          {/* </NavLink> */}
+
           <div className="flex items-center">
             <div className="hidden lg:flex space-x-8">
               {navLinks.map((item) => (
                 <NavLink
                   key={item.label}
                   to={item.href}
-                  className="text-white hover:text-cyan-600 transition duration-300"
+                  className="button-28  "
                 >
                   {item.label}
                   {item.label === 'Cart' && cart.cartItems.length > 0 && (

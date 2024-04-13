@@ -28,15 +28,15 @@ function Product(props) {
 
   return (
     <div
-      className="relative flex w-83 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow hover:shadow-2xl"
+      className="relative flex w-23 flex-col rounded-xl bg-[#78552e] bg-clip-border text-white shadow colSad card-client "
       key={product.slug}
     >
-      <div className="relative mx-4 mt-4 h-80 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
+      <div className=" mx-4 mt-4 h-60 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
         <Link to={`/product/${product.slug}`}>
           <img
             src={product.image}
             alt={product.name}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
         </Link>
       </div>
@@ -61,7 +61,7 @@ function Product(props) {
           </button>
         ) : (
           <button
-            className="block w-full select-none rounded-lg bg-gray-300 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none hover:bg-blue-gray-900 hover:text-black"
+            className="block w-full select-none rounded-lg bg-gray-700 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none hover:bg-blue-gray-900 hover:text-black"
             type="button"
             onClick={() => addToCartHandler(product)}
           >

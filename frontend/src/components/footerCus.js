@@ -32,7 +32,7 @@ const footerCus = () => {
 
   return (
     <div className="app min-h-screen flex items-end justify-center font-poppins">
-      <div className="py-5 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 bg-green-800 text-white w-full p-4 relative">
+      <div className="py-5 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 bg-gray-900 text-white w-full p-4 relative">
         <div className="  ">
           <div className="footer-img flex items-center">
             <img
@@ -54,7 +54,7 @@ const footerCus = () => {
               return (
                 <Icon
                   key={`social-${index}`}
-                  className="w-14 h-10 p-2 rounded-full bg-green-700 hover:bg-white hover:text-green-700 cursor-pointer"
+                  className="w-14 h-10 p-2 rounded-full bg-gray-700 hover:bg-white hover:text-gray-700 cursor-pointer"
                 />
               );
             })}

@@ -209,26 +209,27 @@ export default function OrderScreen() {
         <title>Order {orderId}</title>
       </Helmet>
       <h1 className="my-3">Order {orderId}</h1>
-      <div className="flex flex-wrap -mx-3">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Shipping</h2>
-            <p>
-              <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-              <strong>Address: </strong> {order.shippingAddress.address},
-              {order.shippingAddress.city}, {order.shippingAddress.postalCode},
-              {order.shippingAddress.country};
-              {order.shippingAddress.location &&
-                order.shippingAddress.location.lat && (
-                  <a
-                    target="_new"
-                    href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
-                  >
-                    Show On Map
-                  </a>
-                )}
-            </p>
-            {/* <p>
+      <div className="text-white border-gray-400">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Shipping</h2>
+              <p>
+                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
+                <strong>Address: </strong> {order.shippingAddress.address},
+                {order.shippingAddress.city}, {order.shippingAddress.postalCode}
+                ,{order.shippingAddress.country};
+                {order.shippingAddress.location &&
+                  order.shippingAddress.location.lat && (
+                    <a
+                      target="_new"
+                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
+                    >
+                      Show On Map
+                    </a>
+                  )}
+              </p>
+              {/* <p>
               <strong>Name:</strong> {order?.shippingAddress?.fullName} <br />
               <strong>Address: </strong> {order?.shippingAddress?.address},
               {order?.shippingAddress?.city},{' '}
@@ -244,121 +245,123 @@ export default function OrderScreen() {
               )}
             </p> */}
 
-            {order.isDelivered ? (
-              <MessageBox variant="success">
-                Delivered at {order.deliveredAt}
-              </MessageBox>
-            ) : (
-              <MessageBox variant="danger">Not Delivered</MessageBox>
-            )}
-          </div>
+              {order.isDelivered ? (
+                <MessageBox variant="success">
+                  Delivered at {order.deliveredAt}
+                </MessageBox>
+              ) : (
+                <MessageBox variant="danger">Not Delivered</MessageBox>
+              )}
+            </div>
 
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Payment</h2>
-            <p>
-              <strong>Method:</strong> {order.paymentMethod}
-            </p>
-            {order.isPaid ? (
-              <MessageBox variant="success">Paid at {order.paidAt}</MessageBox>
-            ) : (
-              <MessageBox variant="danger">Not Paid</MessageBox>
-            )}
-          </div>
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Payment</h2>
+              <p>
+                <strong>Method:</strong> {order.paymentMethod}
+              </p>
+              {order.isPaid ? (
+                <MessageBox variant="success">
+                  Paid at {order.paidAt}
+                </MessageBox>
+              ) : (
+                <MessageBox variant="danger">Not Paid</MessageBox>
+              )}
+            </div>
 
-          <div className="p-4 shadow mb-4">
-            <h2 className="font-bold mb-2">Items</h2>
-            <ul className="list-none">
-              {order.orderItems.map((item) => (
-                <li key={item._id} className="py-1">
-                  <div className="flex items-center">
-                    <div className="w-1/2">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full rounded"
-                      />
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                    </div>
-                    <div className="w-1/4">
-                      <span>{item.quantity}</span>
-                      <br></br>
-                      <p>Size: {item.size}</p>
-                    </div>
-                    <div className="w-1/4">₹{item.price}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 px-3">
-          <div className="p-4 shadow">
-            <h2 className="font-bold mb-2">Order Summary</h2>
-            <ul className="list-none">
-              <li className="py-1 flex justify-between">
-                <span>Items</span>
-                <span>₹{order.itemsPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <span>Shipping</span>
-                <span>₹{order.shippingPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <span>Tax</span>
-                <span>₹{order.taxPrice.toFixed(2)}</span>
-              </li>
-              <li className="py-1 flex justify-between">
-                <strong>Order Total</strong>
-                <strong>₹{order.totalPrice.toFixed(2)}</strong>
-              </li>
-              {!userInfo.isAdmin &&
-                !order.isPaid &&
-                order.paymentMethod !== 'Cash on Delivery' && (
-                  <li className="py-1 relative z-0">
-                    {isPending ? (
-                      <LoadingBox />
-                    ) : (
-                      <div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
+            <div className="p-4 shadow mb-4">
+              <h2 className="font-bold mb-2">Items</h2>
+              <ul className="list-none">
+                {order.orderItems.map((item) => (
+                  <li key={item._id} className="py-1">
+                    <div className="flex items-center">
+                      <div className="w-1/2">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full rounded"
+                        />
+                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
                       </div>
-                    )}
-                    {loadingPay && <LoadingBox></LoadingBox>}
+                      <div className="w-1/4">
+                        <span>{item.quantity}</span>
+                        <br></br>
+                        <p>Size: {item.size}</p>
+                      </div>
+                      <div className="w-1/4">₹{item.price}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <div className="p-4 shadow">
+              <h2 className="font-bold mb-2">Order Summary</h2>
+              <ul className="list-none">
+                <li className="py-1 flex justify-between">
+                  <span>Items</span>
+                  <span>₹{order.itemsPrice.toFixed(2)}</span>
+                </li>
+                <li className="py-1 flex justify-between">
+                  <span>Shipping</span>
+                  <span>₹{order.shippingPrice.toFixed(2)}</span>
+                </li>
+                <li className="py-1 flex justify-between">
+                  <span>Tax</span>
+                  <span>₹{order.taxPrice.toFixed(2)}</span>
+                </li>
+                <li className="py-1 flex justify-between">
+                  <strong>Order Total</strong>
+                  <strong>₹{order.totalPrice.toFixed(2)}</strong>
+                </li>
+                {!userInfo.isAdmin &&
+                  !order.isPaid &&
+                  order.paymentMethod !== 'Cash on Delivery' && (
+                    <li className="py-1 relative z-0">
+                      {isPending ? (
+                        <LoadingBox />
+                      ) : (
+                        <div>
+                          <PayPalButtons
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={onError}
+                          ></PayPalButtons>
+                        </div>
+                      )}
+                      {loadingPay && <LoadingBox></LoadingBox>}
+                    </li>
+                  )}
+                {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && ( */}
+                {userInfo.isAdmin && !order.isDelivered && order.isPaid && (
+                  <li className="mb-4">
+                    {loadingDeliver && <LoadingBox></LoadingBox>}
+                    <div className="flex justify-center">
+                      <button
+                        type="button"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={deliverOrderHandler}
+                      >
+                        Deliver Order
+                      </button>
+                    </div>
                   </li>
                 )}
-              {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && ( */}
-              {userInfo.isAdmin && !order.isDelivered && order.isPaid && (
-                <li className="mb-4">
-                  {loadingDeliver && <LoadingBox></LoadingBox>}
-                  <div className="flex justify-center">
-                    <button
-                      type="button"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={deliverOrderHandler}
-                    >
-                      Deliver Order
-                    </button>
-                  </div>
-                </li>
-              )}
-              {userInfo.isAdmin && !order.isPaid && (
-                <li className="mb-4">
-                  {loadingPay && <LoadingBox></LoadingBox>}
-                  <div className="flex justify-center">
-                    <button
-                      type="button"
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={onApprove2}
-                    >
-                      Paid
-                    </button>
-                  </div>
-                </li>
-              )}
-              {/* {userInfo.isAdmin && (
+                {userInfo.isAdmin && !order.isPaid && (
+                  <li className="mb-4">
+                    {loadingPay && <LoadingBox></LoadingBox>}
+                    <div className="flex justify-center">
+                      <button
+                        type="button"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={onApprove2}
+                      >
+                        Paid
+                      </button>
+                    </div>
+                  </li>
+                )}
+                {/* {userInfo.isAdmin && (
                 <li className="mb-4">
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   <div className="flex justify-center">
@@ -372,7 +375,8 @@ export default function OrderScreen() {
                   </div>
                 </li>
               )} */}
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
