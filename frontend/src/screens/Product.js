@@ -28,8 +28,9 @@ function Product(props) {
 
   return (
     <div
-      className="relative flex w-23 flex-col rounded-xl bg-[#78552e] bg-clip-border text-white shadow colSad card-client "
+      className="relative flex w-23 flex-col rounded-xl bg-[#cc7d18]  bg-clip-border text-white shadow colSad card-client "
       key={product.slug}
+      // style={{ backgroundImage: `url('path_to_your_image.jpg')` }}
     >
       <div className=" mx-4 mt-4 h-60 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
         <Link to={`/product/${product.slug}`}>

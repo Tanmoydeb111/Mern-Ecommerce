@@ -49,81 +49,83 @@ export default function DashboardScreen() {
   }, [userInfo]);
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      {loading ? (
-        <LoadingBox />
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 shadow-md">
-              <h2 className="font-bold mb-2">
-                {summary.users && summary.users[0]
-                  ? summary.users[0].numUsers
-                  : 0}
-              </h2>
-              <p>Users</p>
-            </div>
-            <div className="p-4 shadow-md">
-              <h2 className="font-bold mb-2">
-                {summary.orders && summary.users[0]
-                  ? summary.orders[0].numOrders
-                  : 0}
-              </h2>
-              <p>Orders</p>
-            </div>
-            <div className="p-4 shadow-md">
-              <h2 className="font-bold mb-2">
-                ₹
-                {summary.orders && summary.users[0]
-                  ? summary.orders[0].totalSales.toFixed(2)
-                  : 0}
-              </h2>
-              <p>Sales</p>
-            </div>
-          </div>
-          <div className="my-3">
-            <h2 className="text-xl font-bold">Sales</h2>
-            {summary.dailyOrders.length === 0 ? (
-              <div className="bg-blue-200 text-blue-700 p-3 rounded">
-                No Sale
+    <div className=" pt-10">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold mb-4 text-center ">Dashboard</h1>
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-4 shadow-md">
+                <h2 className="font-bold mb-2">
+                  {summary.users && summary.users[0]
+                    ? summary.users[0].numUsers
+                    : 0}
+                </h2>
+                <p>Users</p>
               </div>
-            ) : (
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="AreaChart"
-                loader={<div>Loading Chart...</div>}
-                data={[
-                  ['Date', 'Sales'],
-                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
-                ]}
-              />
-            )}
-          </div>
-          <div className="my-3">
-            <h2 className="text-xl font-bold">Categories</h2>
-            {summary.productCategories.length === 0 ? (
-              <div className="bg-blue-200 text-blue-700 p-3 rounded">
-                No Category
+              <div className="p-4 shadow-md">
+                <h2 className="font-bold mb-2">
+                  {summary.orders && summary.users[0]
+                    ? summary.orders[0].numOrders
+                    : 0}
+                </h2>
+                <p>Orders</p>
               </div>
-            ) : (
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="PieChart"
-                loader={<div>Loading Chart...</div>}
-                data={[
-                  ['Category', 'Products'],
-                  ...summary.productCategories.map((x) => [x._id, x.count]),
-                ]}
-              />
-            )}
-          </div>
-        </>
-      )}
+              <div className="p-4 shadow-md">
+                <h2 className="font-bold mb-2">
+                  ₹
+                  {summary.orders && summary.users[0]
+                    ? summary.orders[0].totalSales.toFixed(2)
+                    : 0}
+                </h2>
+                <p>Sales</p>
+              </div>
+            </div>
+            <div className="my-3">
+              <h2 className="text-xl font-bold">Sales</h2>
+              {summary.dailyOrders.length === 0 ? (
+                <div className="bg-blue-200 text-blue-700 p-3 rounded">
+                  No Sale
+                </div>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="AreaChart"
+                  loader={<div>Loading Chart...</div>}
+                  data={[
+                    ['Date', 'Sales'],
+                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                  ]}
+                />
+              )}
+            </div>
+            <div className="my-3">
+              <h2 className="text-xl font-bold">Categories</h2>
+              {summary.productCategories.length === 0 ? (
+                <div className="bg-blue-200 text-blue-700 p-3 rounded">
+                  No Category
+                </div>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="PieChart"
+                  loader={<div>Loading Chart...</div>}
+                  data={[
+                    ['Category', 'Products'],
+                    ...summary.productCategories.map((x) => [x._id, x.count]),
+                  ]}
+                />
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

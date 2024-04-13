@@ -160,3 +160,7 @@
     transform: rotate(360deg);
   }
 }
+
+.logo {
+  animation: App-logo-spin 2s linear infinite;
+}

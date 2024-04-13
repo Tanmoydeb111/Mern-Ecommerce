@@ -32,16 +32,12 @@ const footerCus = () => {
 
   return (
     <div className="app min-h-screen flex items-end justify-center font-poppins">
-      <div className="py-5 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 bg-gray-900 text-white w-full p-4 relative">
+      <div className="py-5 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 bg-black text-white w-full p-4 relative">
         <div className="  ">
           <div className="footer-img flex items-center">
-            <img
-              src={'https://i.imgur.com/520zDfd.png'}
-              alt=""
-              className="w-16 h-auto"
-            />
+            <img src="images/logo.svg" alt="" className="w-16 h-auto" />
             <span className="text-3xl font-bold pl-2 text-white">
-              Company name
+              Studio Nupur
             </span>
           </div>
           <div className="infos text-gray-400">

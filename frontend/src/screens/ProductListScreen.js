@@ -136,9 +136,11 @@ export default function ProductListScreen() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold">Products</h1>
+    <div className="pt-10">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold ">Products</h1>
+      </div>
+      <div className="flex justify-end px-4  items-center mb-4 text-center">
         <button
           onClick={createHandler}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -158,8 +160,8 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-black">
+            <thead className="bg-transparent">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   ID
@@ -181,7 +183,7 @@ export default function ProductListScreen() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-transparent divide-y divide-black">
               {products.map((product) => (
                 <tr key={product._id}>
                   <td className="px-6 py-4 whitespace-nowrap">{product._id}</td>
@@ -200,14 +202,14 @@ export default function ProductListScreen() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       type="button"
-                      className="bg-white text-black py-2 px-4 rounded"
+                      className="bg-blue-400 text-black py-2 px-4 rounded mr-2"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
                       Edit
                     </button>
                     <button
                       type="button"
-                      className="bg-white text-black py-2 px-4 rounded"
+                      className="bg-blue-400 text-black py-2 px-4 rounded"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete

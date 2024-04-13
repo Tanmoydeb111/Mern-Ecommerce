@@ -88,18 +88,18 @@ export default function OrderListScreen() {
   };
 
   return (
-    <div>
+    <div className="pt-10">
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <h1>Orders</h1>
+      <h1 className="text-3xl font-bold text-center py-5 mr-2">Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table-auto w-full">
+        <table className="table-auto w-full text-black border-black border">
           <thead>
             <tr>
               <th className="px-4 py-2">ID</th>
@@ -115,32 +115,32 @@ export default function OrderListScreen() {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td className="border px-4 py-2">{order._id}</td>
-                <td className="border px-4 py-2">
+                <td className="border border-black px-4 py-2">{order._id}</td>
+                <td className="border border-black px-4 py-2">
                   {order.user ? order.user.name : 'DELETED USER'}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {order.createdAt.substring(0, 10)}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {order.totalPrice.toFixed(2)}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {order.isPaid ? order.paidAt.substring(0, 10) : 'No'}
                 </td>
-                {/* <td className="border px-4 py-2">
+                {/* <td className="border border-black px-4 py-2">
                   {order.isPaid ? order.paidAt.substring(0, 10) : 'No'}
                 </td> */}
-                <td className="border px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {order.isDelivered
                     ? order.deliveredAt.substring(0, 10)
                     : 'No'}
                 </td>
-                {/* <td className="border px-4 py-2">{order.user.size}</td> */}
-                <td className="border px-4 py-2">
+                {/* <td className="border border-black px-4 py-2">{order.user.size}</td> */}
+                <td className="border border-black px-4 py-2">
                   <button
                     type="button"
-                    className="bg-white text-black py-2 px-4 rounded"
+                    className="bg-blue-400 text-black py-2 px-4 rounded mr-2"
                     onClick={() => {
                       navigate(`/order/${order._id}`);
                     }}
@@ -149,7 +149,7 @@ export default function OrderListScreen() {
                   </button>
                   <button
                     type="button"
-                    className="bg-white text-black py-2 px-4 rounded"
+                    className="bg-blue-400 text-black py-2 px-4 rounded"
                     onClick={() => deleteHandler(order)}
                   >
                     Delete

@@ -24,7 +24,7 @@ const MyCarousel = () => (
       <div>
         <img
           src="/images/p9.webp"
-          className="  fa-object-group h-[600px] rounded-xl"
+          className="  object-fill h-[600px] rounded-xl"
           alt="Slide 3"
         />
         <p className="legend">Slide 3</p>
@@ -32,7 +32,7 @@ const MyCarousel = () => (
       <div>
         <img
           src="/images/p10.webp"
-          className="  object-cover h-[600px] rounded-xl"
+          className="  object-fill h-[600px] rounded-xl"
           alt="Slide 3"
         />
         <p className="legend">Slide 3</p>
@@ -40,7 +40,7 @@ const MyCarousel = () => (
       <div>
         <img
           src="/images/p11.webp"
-          className="  fa-object-ungroup h-[600px] rounded-xl"
+          className="  object-fill h-[600px] rounded-xl"
           alt="Slide 3"
         />
         <p className="legend">Slide 3</p>
@@ -48,7 +48,7 @@ const MyCarousel = () => (
       <div>
         <img
           src="/images/p12.webp"
-          className="  fa-object-group h-[600px] rounded-xl"
+          className="  object-fill h-[600px] rounded-xl"
           alt="Slide 3"
         />
         <p className="legend">Slide 3</p>

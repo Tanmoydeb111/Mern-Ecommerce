@@ -42,8 +42,10 @@ function ProductPage() {
       <Helmet>
         <title>Studio Nupur</title>
       </Helmet>
-      <h1 className="font-bold">Featured Products</h1>
-      <div>
+      <div className="pt-10">
+        <h1 className="font-bold text-center m-2 py-5 text-lg">
+          Featured Products
+        </h1>
         {loading ? (
           <div>
             <LoadingBox />

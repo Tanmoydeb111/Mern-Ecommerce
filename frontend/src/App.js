@@ -30,12 +30,13 @@ import UserEditScreen from './screens/UserEditScreen';
 import MapScreen from './screens/MapScreen';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import CustomTS from './screens/CustomTS';
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="bg-amber-300 pt-16">
+      <div className="bg-amber-300 pt-20">
         {/* <header>
           <Link to="/">StudioNupur</Link>
         </header> */}
@@ -122,6 +123,7 @@ function App() {
             <Route path="/signup" element={<SignupScreen />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/productpage" element={<ProductPage />} />
+            <Route path="/customts" element={<CustomTS />} />
             <Route
               path="/orderhistory"
               element={

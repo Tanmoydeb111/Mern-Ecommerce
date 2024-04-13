@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Store } from '../Store';
+// import Header from './Header';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,22 @@ const Navbar = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   // const { fullBox, cart, userInfo } = state;
-  const location = useLocation();
+  // const Header = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  // };
 
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -24,7 +40,7 @@ const Navbar = () => {
     { href: '/', label: 'Home' },
     { href: '/productpage', label: 'Products' },
     { href: '/aboutus', label: 'About Us' },
-    { href: '/contact-us', label: 'Contact Us' },
+    // { href: '/customts', label: 'Custom Tshirt' },
     { href: '/cart', label: 'Cart' },
   ];
 
@@ -34,14 +50,17 @@ const Navbar = () => {
 
   return (
     <div>
-      <header className="bg-transparent fixed top-0 w-full z-50 backdrop-filter-blur">
+      <header
+        className="fixed top-0 w-full z-50 bg-transparent"
+        style={{ backdropFilter: `blur(${scrollPosition}px)` }}
+      >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between ">
           {/* <NavLink
             to="/"
             className="text-3xl font-bold text-[#ff8400] bg-transparent"
           > */}
           <Link to="/">
-            <img src="images/logo.svg" className="h-20" alt="Logo" />
+            <img src="images/logo.svg" className="h-20 logo" alt="Logo" />
           </Link>
           {/* </NavLink> */}
 
@@ -158,7 +177,7 @@ const Navbar = () => {
               ) : (
                 <NavLink
                   to="/signin"
-                  className="block text-white px-4 py-2 hover:bg-gray-700 transition duration-300"
+                  className="block text-black px-4 py-2 hover:bg-gray-700 transition duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign In
@@ -174,7 +193,7 @@ const Navbar = () => {
                 <div className="relative">
                   <button
                     type="button"
-                    className="text-white hover:text-gray-300 transition duration-300 flex items-center"
+                    className="text-black text-lg  hover:text-gray-500 transition duration-300 flex items-center"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   >
                     {userInfo.name}

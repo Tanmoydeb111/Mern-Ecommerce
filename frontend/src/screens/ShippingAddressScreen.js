@@ -61,11 +61,11 @@ export default function ShippingAddressScreen() {
       </Helmet>
 
       <CheckoutSteps step1 step2></CheckoutSteps>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-md mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="my-3 text-2xl font-bold">Shipping Address</h1>
         <form onSubmit={submitHandler}>
           <div className="mb-3">
-            <label className="block text-lg font-medium text-white">
+            <label className="block text-lg font-medium text-black">
               Full Name
             </label>
             <input
@@ -76,7 +76,7 @@ export default function ShippingAddressScreen() {
             />
           </div>
           <div className="mb-3">
-            <label className="block text-sm font-medium text-white">
+            <label className="block text-lg font-medium text-black">
               Address
             </label>
             <input
@@ -87,7 +87,7 @@ export default function ShippingAddressScreen() {
             />
           </div>
           <div className="mb-3">
-            <label className="block text-sm font-medium text-white">City</label>
+            <label className="block text-lg font-medium text-black">City</label>
             <input
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -96,7 +96,7 @@ export default function ShippingAddressScreen() {
             />
           </div>
           <div className="mb-3">
-            <label className="block text-sm font-medium text-white">
+            <label className="block text-lg font-medium text-black">
               Postal Code
             </label>
             <input
@@ -107,7 +107,7 @@ export default function ShippingAddressScreen() {
             />
           </div>
           <div className="mb-3">
-            <label className="block text-sm font-medium text-white">
+            <label className="block text-lg font-medium text-black">
               Country
             </label>
             <input
@@ -139,7 +139,7 @@ export default function ShippingAddressScreen() {
           <div className="mb-3">
             <button
               type="submit"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium roundelgmd shadow-sm text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Continue
             </button>
