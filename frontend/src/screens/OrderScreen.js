@@ -76,7 +76,7 @@ export default function OrderScreen() {
       .create({
         purchase_units: [
           {
-            amount: { value: order.totalPrice },
+            amount: { value: (order.totalPrice / 82).toFixed(2) },
           },
         ],
       })

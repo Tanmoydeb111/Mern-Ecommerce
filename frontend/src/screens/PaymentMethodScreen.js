@@ -109,7 +109,7 @@ export default function PaymentMethodScreen() {
               <span className="ml-2 ">PayPal</span>
             </label>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label
               className={`inline-flex items-center button-28 ${
                 paymentMethodName === 'Stripe' ? 'active' : ''
@@ -125,7 +125,7 @@ export default function PaymentMethodScreen() {
               />
               <span className="ml-2 ">Stripe</span>
             </label>
-          </div>
+          </div> */}
           <div className="mb-4">
             <label
               className={`inline-flex items-center button-28 ${
