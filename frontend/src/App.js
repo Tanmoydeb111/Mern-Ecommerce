@@ -1,5 +1,5 @@
-import data from './data';
-import logo from './logo.svg';
+// import data from './data';
+// import logo from './logo.svg';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,8 +31,22 @@ import MapScreen from './screens/MapScreen';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import CustomTS from './screens/CustomTS';
+import axios from 'axios';
+// require('dotenv').config();
+// import dotenv from 'dotenv';
+
+// dotenv.config();
+// const BASE_URL = process.env.BASE_URL;
+
+// axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://mern-ecommerce-3-b3p3.onrender.com';
+// axios.defaults.baseURL = `${BASE_URL}`;
+// axios.defaults.baseURL = BASE_URL;
+axios.defaults.withCredentials = true;
 
 function App() {
+  console.log('BASE_URL:', process.env.BASE_URL);
+
   return (
     <BrowserRouter>
       <Navbar />
