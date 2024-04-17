@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FON_URL,
+    origin: 'https://admirable-souffle-47710e.netlify.app',
   })
 );
 
