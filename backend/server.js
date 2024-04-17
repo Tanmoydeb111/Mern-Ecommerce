@@ -53,5 +53,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
-  // console.log(process.env.FON_URL);
+  console.log(process.env.FON_URL);
 });
