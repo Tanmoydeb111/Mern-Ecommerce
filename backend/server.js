@@ -26,9 +26,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: process.env.FON_URL,
   })
 );
+
+// app.use(cors({
+//   origin: ''
+// }));
 
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
@@ -49,4 +53,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
+  // console.log(process.env.FON_URL);
 });
