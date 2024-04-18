@@ -58,8 +58,8 @@ export default function DashboardScreen() {
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 shadow-md">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
+              <div className="p-4 shadow-xl border border-black rounded-lg">
                 <h2 className="font-bold mb-2">
                   {summary.users && summary.users[0]
                     ? summary.users[0].numUsers
@@ -67,7 +67,7 @@ export default function DashboardScreen() {
                 </h2>
                 <p>Users</p>
               </div>
-              <div className="p-4 shadow-md">
+              <div className="p-4 shadow-xl border border-black rounded-lg">
                 <h2 className="font-bold mb-2">
                   {summary.orders && summary.users[0]
                     ? summary.orders[0].numOrders
@@ -75,17 +75,17 @@ export default function DashboardScreen() {
                 </h2>
                 <p>Orders</p>
               </div>
-              <div className="p-4 shadow-md">
+              <div className="p-4 shadow-xl border border-black rounded-lg">
                 <h2 className="font-bold mb-2">
                   ₹
                   {summary.orders && summary.users[0]
                     ? summary.orders[0].totalSales.toFixed(2)
                     : 0}
                 </h2>
-                <p>Sales</p>
+                <p className="py-4 mb-4">Sales</p>
               </div>
             </div>
-            <div className="my-3">
+            <div className="my-3 py-4">
               <h2 className="text-xl font-bold">Sales</h2>
               {summary.dailyOrders.length === 0 ? (
                 <div className="bg-blue-200 text-blue-700 p-3 rounded">
@@ -104,10 +104,10 @@ export default function DashboardScreen() {
                 />
               )}
             </div>
-            <div className="my-3">
+            <div className="my-3 py-4">
               <h2 className="text-xl font-bold">Categories</h2>
               {summary.productCategories.length === 0 ? (
-                <div className="bg-blue-200 text-blue-700 p-3 rounded">
+                <div className="bg-blue-200 text-blue-700 p-3 rounded py-4 mb-5">
                   No Category
                 </div>
               ) : (

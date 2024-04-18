@@ -136,11 +136,110 @@ export default function ProductListScreen() {
   };
 
   return (
+    // <div className="pt-10">
+    //   <div className="text-center">
+    //     <h1 className="text-3xl font-bold ">Products</h1>
+    //   </div>
+    //   <div className="flex justify-end px-4  items-center mb-4 text-center">
+    //     <button
+    //       onClick={createHandler}
+    //       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    //     >
+    //       Create Product
+    //     </button>
+    //   </div>
+
+    //   {/* {loadingCreate && <div className="animate-pulse">Loading...</div>} */}
+
+    //   {loadingCreate && <LoadingBox></LoadingBox>}
+    //   {loadingDelete && <LoadingBox></LoadingBox>}
+
+    //   {loading ? (
+    //     <LoadingBox></LoadingBox>
+    //   ) : error ? (
+    //     <MessageBox variant="danger">{error}</MessageBox>
+    //   ) : (
+    //     <>
+    //       <table className="min-w-full divide-y divide-black">
+    //         <thead className="bg-transparent">
+    //           <tr>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               ID
+    //             </th>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               NAME
+    //             </th>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               PRICE
+    //             </th>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               CATEGORY
+    //             </th>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               BRAND
+    //             </th>
+    //             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+    //               ACTIONS
+    //             </th>
+    //           </tr>
+    //         </thead>
+    //         <tbody className="bg-transparent divide-y divide-black">
+    //           {products.map((product) => (
+    //             <tr key={product._id}>
+    //               <td className="px-6 py-4 whitespace-nowrap">{product._id}</td>
+    //               <td className="px-6 py-4 whitespace-nowrap">
+    //                 {product.name}
+    //               </td>
+    //               <td className="px-6 py-4 whitespace-nowrap">
+    //                 ₹{product.price}
+    //               </td>
+    //               <td className="px-6 py-4 whitespace-nowrap">
+    //                 {product.category}
+    //               </td>
+    //               <td className="px-6 py-4 whitespace-nowrap">
+    //                 {product.brand}
+    //               </td>
+    //               <td className="px-6 py-4 whitespace-nowrap">
+    //                 <button
+    //                   type="button"
+    //                   className="bg-blue-400 text-black py-2 px-4 rounded mr-2"
+    //                   onClick={() => navigate(`/admin/product/${product._id}`)}
+    //                 >
+    //                   Edit
+    //                 </button>
+    //                 <button
+    //                   type="button"
+    //                   className="bg-blue-400 text-black py-2 px-4 rounded"
+    //                   onClick={() => deleteHandler(product)}
+    //                 >
+    //                   Delete
+    //                 </button>
+    //               </td>
+    //             </tr>
+    //           ))}
+    //         </tbody>
+    //       </table>
+
+    //       <div>
+    //         {[...Array(pages).keys()].map((x) => (
+    //           <Link
+    //             className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+    //             key={x + 1}
+    //             to={`/admin/products?page=${x + 1}`}
+    //           >
+    //             Next Items: {x}
+    //           </Link>
+    //         ))}
+    //       </div>
+    //     </>
+    //   )}
+    // </div>
+
     <div className="pt-10">
       <div className="text-center">
-        <h1 className="text-3xl font-bold ">Products</h1>
+        <h1 className="text-3xl font-bold">Products</h1>
       </div>
-      <div className="flex justify-end px-4  items-center mb-4 text-center">
+      <div className="flex justify-end px-4 items-center mb-4 text-center">
         <button
           onClick={createHandler}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -160,67 +259,73 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="min-w-full divide-y divide-black">
-            <thead className="bg-transparent">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  ID
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  NAME
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  PRICE
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  CATEGORY
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  BRAND
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  ACTIONS
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-transparent divide-y divide-black">
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td className="px-6 py-4 whitespace-nowrap">{product._id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {product.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    ₹{product.price}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {product.category}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {product.brand}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <button
-                      type="button"
-                      className="bg-blue-400 text-black py-2 px-4 rounded mr-2"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-blue-400 text-black py-2 px-4 rounded"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-black">
+              <thead className="bg-transparent divide-y divide-black">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    NAME
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    PRICE
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    CATEGORY
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    BRAND
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    ACTIONS
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-transparent divide-y divide-black">
+                {products.map((product) => (
+                  <tr key={product._id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {product._id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {product.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      ₹{product.price}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {product.category}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {product.brand}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap space-x-4">
+                      <button
+                        type="button"
+                        className="bg-blue-400 text-black py-2 px-4 rounded mr-2"
+                        onClick={() =>
+                          navigate(`/admin/product/${product._id}`)
+                        }
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        className="bg-blue-400 text-black py-2 px-4 rounded"
+                        onClick={() => deleteHandler(product)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-          <div>
+          <div className="flex justify-center mt-4">
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}

@@ -127,15 +127,15 @@ function ProductScreen() {
   ) : (
     <div>
       <h1>{slug}</h1>
-      <div className="flex text-black ">
-        <div className="w-1/2">
+      <div className="flex flex-col md:flex-row text-black ">
+        <div className="w-full md:w-1/2">
           <img
             className="w-full"
             src={selectedImage || product.image}
             alt={product.name}
           ></img>
         </div>
-        <div className="w-1/4 px-4 ">
+        <div className="w-full md:w-1/4 px-4">
           <ul>
             <li>
               <Helmet>
@@ -161,7 +161,7 @@ function ProductScreen() {
                         onClick={() => setSelectedImage(x)}
                       >
                         <img
-                          className="w-full h-full object-cover"
+                          className="w-32 h-32 object-cover"
                           src={x}
                           alt="product"
                         />
@@ -178,7 +178,7 @@ function ProductScreen() {
             </li>
           </ul>
         </div>
-        <div className="w-1/4 px-4">
+        <div className="w-full md:w-1/4 px-4">
           <div className="border p-4">
             <ul>
               <li>

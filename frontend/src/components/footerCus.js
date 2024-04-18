@@ -18,7 +18,6 @@ const footerCus = () => {
     [
       { label: 'About us', key: 'item-1-1' },
       { label: 'Contact us', key: 'item-1-3' },
-      { label: 'Testimonials', key: 'item-1-5' },
     ],
     [
       // { label: 'Support', key: 'header-2' },
@@ -41,7 +40,7 @@ const footerCus = () => {
             </span>
           </div>
           <div className="infos text-gray-400">
-            <span>Copyright © 2020 Nexcent ltd.</span>
+            <span>Copyright © 2024 </span>
             <span>All rights reserved</span>
           </div>
           <div className="footer-icons flex items-center space-x-3">

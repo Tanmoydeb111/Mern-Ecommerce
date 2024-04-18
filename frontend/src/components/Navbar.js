@@ -163,7 +163,7 @@ const Navbar = () => {
                           Order History
                         </NavLink>
                         <NavLink
-                          to="#signout"
+                          to="/"
                           onClick={signoutHandler}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                           role="menuitem"
@@ -175,13 +175,13 @@ const Navbar = () => {
                   )}
                 </div>
               ) : (
-                <NavLink
+                <Link
                   to="/signin"
                   className="block text-black px-4 py-2 hover:bg-gray-700 transition duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign In
-                </NavLink>
+                </Link>
               )}
             </div>
           )}
@@ -236,7 +236,7 @@ const Navbar = () => {
                           Order History
                         </NavLink>
                         <NavLink
-                          to="#signout"
+                          to="/"
                           onClick={signoutHandler}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                           role="menuitem"
@@ -250,7 +250,7 @@ const Navbar = () => {
               ) : (
                 <NavLink
                   to="/signin"
-                  className="text-white hover:text-gray-300 transition duration-300"
+                  className="text-black hover:text-gray-500 transition duration-300 button-28"
                 >
                   Sign In
                 </NavLink>

@@ -38,8 +38,8 @@ import axios from 'axios';
 // dotenv.config();
 // const BASE_URL = process.env.BASE_URL;
 
-// axios.defaults.baseURL = 'http://localhost:5000';
-axios.defaults.baseURL = 'https://mern-ecommerce-3-b3p3.onrender.com';
+axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'https://mern-ecommerce-3-b3p3.onrender.com';
 // axios.defaults.baseURL = `${BASE_URL}`;
 // axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true;

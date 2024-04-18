@@ -49,7 +49,7 @@ export default function OrderHistoryScreen() {
     fetchData();
   }, [userInfo]);
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Helmet>
         <title>Order History</title>
       </Helmet>
@@ -60,7 +60,7 @@ export default function OrderHistoryScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table-auto w-full">
+        <table className="min-w-full divide-y divide-black">
           <thead>
             <tr>
               <th className="px-4 py-2">ID</th>

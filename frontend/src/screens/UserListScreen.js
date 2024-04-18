@@ -91,50 +91,52 @@ export default function UserListScreen() {
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <h1>Users</h1>
+      <h1 className="text-3xl font-bold text-center py-5">Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table-auto w-full">
-          <thead>
-            <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">NAME</th>
-              <th className="px-4 py-2">EMAIL</th>
-              <th className="px-4 py-2">IS ADMIN</th>
-              <th className="px-4 py-2">ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id} className="text-center border">
-                <td className="px-4 py-2">{user._id}</td>
-                <td className="px-4 py-2">{user.name}</td>
-                <td className="px-4 py-2">{user.email}</td>
-                <td className="px-4 py-2">{user.isAdmin ? 'YES' : 'NO'}</td>
-                <td className="px-4 py-2">
-                  <button
-                    type="button"
-                    className="bg-white text-black py-2 px-4 rounded"
-                    onClick={() => navigate(`/admin/user/${user._id}`)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="bg-white text-black py-2 px-4 rounded"
-                    onClick={() => deleteHandler(user)}
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="overflow-x-auto  divide-y divide-black">
+          <table className="min-w-full table-auto w-full  divide-y divide-black">
+            <thead className="bg-transparent divide-y divide-black">
+              <tr>
+                <th className="px-4 py-2">ID</th>
+                <th className="px-4 py-2">NAME</th>
+                <th className="px-4 py-2">EMAIL</th>
+                <th className="px-4 py-2">IS ADMIN</th>
+                <th className="px-4 py-2">ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-transparent divide-y divide-black">
+              {users.map((user) => (
+                <tr key={user._id} className="text-center border ">
+                  <td className="px-4 py-2">{user._id}</td>
+                  <td className="px-4 py-2">{user.name}</td>
+                  <td className="px-4 py-2">{user.email}</td>
+                  <td className="px-4 py-2">{user.isAdmin ? 'YES' : 'NO'}</td>
+                  <td className="px-4 py-2 flex justify-center items-center gap-2">
+                    <button
+                      type="button"
+                      className="bg-blue-400 text-black py-2 px-4 rounded"
+                      onClick={() => navigate(`/admin/user/${user._id}`)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-blue-400 text-black py-2 px-4 rounded"
+                      onClick={() => deleteHandler(user)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
