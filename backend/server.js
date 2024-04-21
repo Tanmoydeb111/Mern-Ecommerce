@@ -26,7 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     credentials: true,
-    origin: 'https://admirable-souffle-47710e.netlify.app',
+    origin: 'https://buyat-suethi-shilpa.netlify.app',
+    // origin: 'http://localhost:3000',
   })
 );
 

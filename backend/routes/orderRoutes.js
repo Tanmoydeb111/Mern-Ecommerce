@@ -57,7 +57,7 @@ orderRouter.get(
 //     res.status(201).send({ message: 'New Order Created', order });
 //     console.log(7);
 //     var mailOptions = {
-//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
+//       from: 'Suethi Shilpa <kalisankar@gmail.com>',
 //       to: `${order.user.name} <${order.user.email}>`,
 //       subject: `Order ${order._id} has been updated`,
 //       html: payOrderEmailTemplate(updatedOrder),
@@ -97,7 +97,7 @@ orderRouter.get(
 //     console.log(7);
 //     console.log(order2.user.email);
 //     var mailOptions = {
-//       from: 'Stdio Nupur <buystudionupur@gmail.com>',
+//       from: 'Suethi Shilpa <kalisankar@gmail.com>',
 //       // to: `Tanmoy <tanmoydeb2002@gmail.com>`,
 //       to: `${order2.user.name} <${order2.user.email}>`,
 //       subject: `New Order ${order._id} has been placed`,
@@ -133,7 +133,7 @@ orderRouter.post(
     res.status(201).send({ message: 'New Order Created', order });
     console.log(7);
     var mailOptions = {
-      from: 'Stdio Nupur <buystudionupur@gmail.com>',
+      from: 'Suethi Shilpa <kalisankar@gmail.com>',
       to: `${req.user.name} <${req.user.email}>`,
       subject: `New Order ${order._id} has been placed`,
       html: payOrderEmailTemplate(order),
@@ -233,7 +233,7 @@ orderRouter.put(
         console.log('Done');
         // console.log(order.user.email);
         var mailOptions = {
-          from: 'Stdio Nupur <buystudionupur@gmail.com>',
+          from: 'Suethi Shilpa <kalisankar@gmail.com>',
           to: `${order.user.name} <${order.user.email}>`,
           subject: `New Order ${order._id} has been placed`,
           html: DeliveryDoneEmailTemplate(order),
@@ -278,7 +278,7 @@ orderRouter.put(
         console.log('Done');
         // console.log(order.user.email);
         var mailOptions = {
-          from: 'Stdio Nupur <buystudionupur@gmail.com>',
+          from: 'Suethi Shilpa <kalisankar@gmail.com>',
           to: `${order.user.name} <${order.user.email}>`,
           subject: `New Order ${order._id} has been placed`,
           html: payDoneEmailTemplate(order),
@@ -310,7 +310,7 @@ orderRouter.post(
 
     if (createdOrder) {
       var mailOptions = {
-        from: 'Stdio Nupur <buystudionupur@gmail.com>',
+        from: 'Suethi Shilpa <kalisankar@gmail.com>',
         to: `${createdOrder.user.name} <${createdOrder.user.email}>`,
         subject: `New Order ${createdOrder._id} has been placed`,
         html: payOrderEmailTemplate(createdOrder),
